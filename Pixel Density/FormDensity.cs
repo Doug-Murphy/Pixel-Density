@@ -13,192 +13,70 @@ namespace Pixel_Density
 
         private void FormLines_Load(object sender, EventArgs e)
         {
-            //this.Size = Screen.FromControl(this).Bounds.Size;
-            this.Opacity = 0;
-            this.Size = new Size(500, 500);
+            this.Size = new Size(400, 400);
             this.Location = new Point(0, 0);
+
+            var halfWidth = this.Width / 2;
+            var halfHeight = this.Height / 2;
+
+            var panel1 = new Panel
+            {
+                Location = new Point(halfWidth * 0, halfWidth * 0),
+                Size = new Size(halfWidth, halfHeight)
+            };
+            panel1.Paint += Panel_Paint;
+
+            var panel2 = new Panel
+            {
+                Location = new Point(halfWidth * 1, halfWidth * 0),
+                Size = new Size(halfWidth, halfHeight)
+            };
+            panel2.Paint += Panel_Paint;
+
+            var panel3 = new Panel
+            {
+                Location = new Point(halfWidth * 0, halfWidth * 1),
+                Size = new Size(halfWidth, halfHeight)
+            };
+            panel3.Paint += Panel_Paint;
+
+            var panel4 = new Panel
+            {
+                Location = new Point(halfWidth * 1, halfWidth * 1),
+                Size = new Size(halfWidth, halfHeight)
+            };
+            panel4.Paint += Panel_Paint;
+
+            this.Controls.Add(panel1);
+            this.Controls.Add(panel2);
+            this.Controls.Add(panel3);
+            this.Controls.Add(panel4);
         }
 
-        private void DrawGrid(object sender, PaintEventArgs e)
+        private void Panel_Paint(object sender, PaintEventArgs e)
         {
-            var start = DateTime.Now;
+            var panelWidth = ((Control)sender).Width;
+            var panelHeight = ((Control)sender).Height;
+
             using (var blackPen = new Pen(Color.FromArgb(255, 0, 0, 0)))
             using (var whitePen = new Pen(Color.FromArgb(255, 255, 255, 255)))
             {
-                for (int x = 0; x < this.Width; x++)
+                for (int x = 0; x < panelWidth; x++)
                 {
-                    for (int y = 0; y < this.Height; y++)
+                    for (int y = 0; y < panelHeight; y++)
                     {
                         if ((x % 2 == 0 && y % 2 == 1) || (x % 2 == 1 && y % 2 == 0))
                         {
                             e.Graphics.DrawRectangle(whitePen, x, y, 1, 1);
-                            Console.WriteLine($"Drawing white at ({x},{y})");
                         }
                         else
                         {
                             e.Graphics.DrawRectangle(blackPen, x, y, 1, 1);
-                            Console.WriteLine($"Drawing black at ({x},{y})");
                         }
                     }
                 }
 
             }
-            Console.WriteLine($"Total milliseconds = {DateTime.Now.Subtract(start).TotalMilliseconds}.");
-            this.Opacity = 100;
-
-            //using (var blackPen = new Pen(Color.FromArgb(255, 0, 0, 0)))
-            //using (var whitePen = new Pen(Color.FromArgb(255, 255, 255, 255)))
-            //{
-            //    var paintTasks = new List<Task>
-            //    {
-            //        Task.Factory.StartNew(() =>
-            //        {
-            //            for (int x = (this.Width / 5) * 0; x < (this.Width / 5) * 1; x++)
-            //            {
-            //                for (int y =0; y < this.Height; y++)
-            //                {
-            //                    if (x % 2 == 0 && y % 2 == 0) //even x, even y
-            //                    {
-            //                        e.Graphics.DrawRectangle(blackPen, x, y, 1, 1);
-            //                        //Console.WriteLine($"Drawing black at ({x},{y})");
-            //                    }
-            //                    else if (x % 2 == 0 && y % 2 == 1) //even x, odd y
-            //                    {
-            //                        e.Graphics.DrawRectangle(whitePen, x, y, 1, 1);
-            //                        //Console.WriteLine($"Drawing white at ({x},{y})");
-            //                    }
-            //                    else if (x % 2 == 1 && y % 2 == 0) //odd x, even y
-            //                    {
-            //                        e.Graphics.DrawRectangle(whitePen, x, y, 1, 1);
-            //                        //Console.WriteLine($"Drawing white at ({x},{y})");
-            //                    }
-            //                    else //odd x, odd y
-            //                    {
-            //                        e.Graphics.DrawRectangle(blackPen, x, y, 1, 1);
-            //                        //Console.WriteLine($"Drawing black at ({x},{y})");
-            //                    }
-            //                }
-            //            }
-            //        }),
-            //        Task.Factory.StartNew(() =>
-            //        {
-            //            for (int x = (this.Width / 5) * 1; x < (this.Width / 5) * 2; x++)
-            //            {
-            //                for (int y =0; y < this.Height; y++)
-            //                {
-            //                    if (x % 2 == 0 && y % 2 == 0) //even x, even y
-            //                    {
-            //                        e.Graphics.DrawRectangle(blackPen, x, y, 1, 1);
-            //                        //Console.WriteLine($"Drawing black at ({x},{y})");
-            //                    }
-            //                    else if (x % 2 == 0 && y % 2 == 1) //even x, odd y
-            //                    {
-            //                        e.Graphics.DrawRectangle(whitePen, x, y, 1, 1);
-            //                        //Console.WriteLine($"Drawing white at ({x},{y})");
-            //                    }
-            //                    else if (x % 2 == 1 && y % 2 == 0) //odd x, even y
-            //                    {
-            //                        e.Graphics.DrawRectangle(whitePen, x, y, 1, 1);
-            //                        //Console.WriteLine($"Drawing white at ({x},{y})");
-            //                    }
-            //                    else //odd x, odd y
-            //                    {
-            //                        e.Graphics.DrawRectangle(blackPen, x, y, 1, 1);
-            //                        //Console.WriteLine($"Drawing black at ({x},{y})");
-            //                    }
-            //                }
-            //            }
-            //        }),
-            //        Task.Factory.StartNew(() =>
-            //        {
-            //            for (int x = (this.Width / 5) * 2; x < (this.Width / 5) * 3; x++)
-            //            {
-            //                for (int y =0; y < this.Height; y++)
-            //                {
-            //                    if (x % 2 == 0 && y % 2 == 0) //even x, even y
-            //                    {
-            //                        e.Graphics.DrawRectangle(blackPen, x, y, 1, 1);
-            //                        //Console.WriteLine($"Drawing black at ({x},{y})");
-            //                    }
-            //                    else if (x % 2 == 0 && y % 2 == 1) //even x, odd y
-            //                    {
-            //                        e.Graphics.DrawRectangle(whitePen, x, y, 1, 1);
-            //                        //Console.WriteLine($"Drawing white at ({x},{y})");
-            //                    }
-            //                    else if (x % 2 == 1 && y % 2 == 0) //odd x, even y
-            //                    {
-            //                        e.Graphics.DrawRectangle(whitePen, x, y, 1, 1);
-            //                        //Console.WriteLine($"Drawing white at ({x},{y})");
-            //                    }
-            //                    else //odd x, odd y
-            //                    {
-            //                        e.Graphics.DrawRectangle(blackPen, x, y, 1, 1);
-            //                        //Console.WriteLine($"Drawing black at ({x},{y})");
-            //                    }
-            //                }
-            //            }
-            //        }),
-            //        Task.Factory.StartNew(() =>
-            //        {
-            //            for (int x = (this.Width / 5) * 3; x < (this.Width / 5) * 4; x++)
-            //            {
-            //                for (int y =0; y < this.Height; y++)
-            //                {
-            //                    if (x % 2 == 0 && y % 2 == 0) //even x, even y
-            //                    {
-            //                        e.Graphics.DrawRectangle(blackPen, x, y, 1, 1);
-            //                        //Console.WriteLine($"Drawing black at ({x},{y})");
-            //                    }
-            //                    else if (x % 2 == 0 && y % 2 == 1) //even x, odd y
-            //                    {
-            //                        e.Graphics.DrawRectangle(whitePen, x, y, 1, 1);
-            //                        //Console.WriteLine($"Drawing white at ({x},{y})");
-            //                    }
-            //                    else if (x % 2 == 1 && y % 2 == 0) //odd x, even y
-            //                    {
-            //                        e.Graphics.DrawRectangle(whitePen, x, y, 1, 1);
-            //                        //Console.WriteLine($"Drawing white at ({x},{y})");
-            //                    }
-            //                    else //odd x, odd y
-            //                    {
-            //                        e.Graphics.DrawRectangle(blackPen, x, y, 1, 1);
-            //                        //Console.WriteLine($"Drawing black at ({x},{y})");
-            //                    }
-            //                }
-            //            }
-            //        }),
-            //        Task.Factory.StartNew(() =>
-            //        {
-            //            for (int x = (this.Width / 5) * 4; x < (this.Width / 5) * 5; x++)
-            //            {
-            //                for (int y =0; y < this.Height; y++)
-            //                {
-            //                    if (x % 2 == 0 && y % 2 == 0) //even x, even y
-            //                    {
-            //                        e.Graphics.DrawRectangle(blackPen, x, y, 1, 1);
-            //                        //Console.WriteLine($"Drawing black at ({x},{y})");
-            //                    }
-            //                    else if (x % 2 == 0 && y % 2 == 1) //even x, odd y
-            //                    {
-            //                        e.Graphics.DrawRectangle(whitePen, x, y, 1, 1);
-            //                        //Console.WriteLine($"Drawing white at ({x},{y})");
-            //                    }
-            //                    else if (x % 2 == 1 && y % 2 == 0) //odd x, even y
-            //                    {
-            //                        e.Graphics.DrawRectangle(whitePen, x, y, 1, 1);
-            //                        //Console.WriteLine($"Drawing white at ({x},{y})");
-            //                    }
-            //                    else //odd x, odd y
-            //                    {
-            //                        e.Graphics.DrawRectangle(blackPen, x, y, 1, 1);
-            //                        //Console.WriteLine($"Drawing black at ({x},{y})");
-            //                    }
-            //                }
-            //            }
-            //        })
-            //    };
-
-            //    Task.WaitAll(paintTasks.ToArray());
         }
     }
 }
