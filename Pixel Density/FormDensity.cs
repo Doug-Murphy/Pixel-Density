@@ -6,64 +6,28 @@ namespace Pixel_Density
 {
     public partial class FormDensity : Form
     {
+        private const int DRAWN_SQUARE_SIZE = 50;
+
         public FormDensity()
         {
             InitializeComponent();
         }
 
-        private void FormLines_Load(object sender, EventArgs e)
+        private void FormDensity_Load(object sender, EventArgs e)
         {
-            this.Size = new Size(400, 400);
+            this.Size = new Size(1000, 1000);
             this.Location = new Point(0, 0);
-
-            var halfWidth = this.Width / 2;
-            var halfHeight = this.Height / 2;
-
-            var panel1 = new Panel
-            {
-                Location = new Point(halfWidth * 0, halfWidth * 0),
-                Size = new Size(halfWidth, halfHeight)
-            };
-            panel1.Paint += Panel_Paint;
-
-            var panel2 = new Panel
-            {
-                Location = new Point(halfWidth * 1, halfWidth * 0),
-                Size = new Size(halfWidth, halfHeight)
-            };
-            panel2.Paint += Panel_Paint;
-
-            var panel3 = new Panel
-            {
-                Location = new Point(halfWidth * 0, halfWidth * 1),
-                Size = new Size(halfWidth, halfHeight)
-            };
-            panel3.Paint += Panel_Paint;
-
-            var panel4 = new Panel
-            {
-                Location = new Point(halfWidth * 1, halfWidth * 1),
-                Size = new Size(halfWidth, halfHeight)
-            };
-            panel4.Paint += Panel_Paint;
-
-            this.Controls.Add(panel1);
-            this.Controls.Add(panel2);
-            this.Controls.Add(panel3);
-            this.Controls.Add(panel4);
         }
 
         private void Panel_Paint(object sender, PaintEventArgs e)
         {
-            var panelWidth = ((Control)sender).Width;
-            var panelHeight = ((Control)sender).Height;
 
             using (var blackPen = new Pen(Color.FromArgb(255, 0, 0, 0)))
             using (var whitePen = new Pen(Color.FromArgb(255, 255, 255, 255)))
             {
-                for (int x = 0; x < panelWidth; x++)
+                for (int x = 0; x < DRAWN_SQUARE_SIZE; x++)
                 {
-                    for (int y = 0; y < panelHeight; y++)
+                    for (int y = 0; y < DRAWN_SQUARE_SIZE; y++)
                     {
                         if ((x % 2 == 0 && y % 2 == 1) || (x % 2 == 1 && y % 2 == 0))
                         {
@@ -75,7 +39,29 @@ namespace Pixel_Density
                         }
                     }
                 }
+            }
 
+            Rectangle screenRectangle = RectangleToScreen(this.ClientRectangle);
+
+            var topMargin = screenRectangle.Top - this.Top;
+            var leftMargin = screenRectangle.Left - this.Left;
+
+            var leftSide = 0;
+            var columnCounter = 0;
+            var rowCounter = 0;
+            var rowsRequired = this.Height / DRAWN_SQUARE_SIZE;
+
+            while (leftSide <= this.Width && rowCounter <= rowsRequired)
+            {
+                e.Graphics.CopyFromScreen(leftMargin, topMargin, DRAWN_SQUARE_SIZE * columnCounter, DRAWN_SQUARE_SIZE * rowCounter, new Size(DRAWN_SQUARE_SIZE, DRAWN_SQUARE_SIZE));
+                leftSide += DRAWN_SQUARE_SIZE;
+                columnCounter++;
+                if (leftSide >= this.Width)
+                {
+                    rowCounter++;
+                    columnCounter = 0;
+                    leftSide = 0;
+                }
             }
         }
     }

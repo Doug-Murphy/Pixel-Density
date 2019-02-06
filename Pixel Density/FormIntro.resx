@@ -122,11 +122,11 @@
 
 Black and white squares will be drawn in an alternating fashion. These squares will be exactly 1x1 pixel.
 
-If you can discern the difference in the black/white squares, then you are able to see at the pixel level and may want to consider increasing your monitor's resolution.
-
 If you more or less see a gray screen, then your monitor's resolution has a pixel density that is at least good enough for your current viewing distance.
 
-Upon clicking the button, the form will draw in the background. Once it has finished drawing, the form will display for you to see. This is to prevent an optical illusion with the stark contrast of the white background.
+If you can discern the difference in the black/white squares, then you are able to see at the pixel level and may want to consider increasing your monitor's resolution. Note that even if you do see the individual pixels, images on screen are typically moving, yet this grid is still. Therefore, it may still be sufficient regardless.
+
+Upon clicking the button, a new form will appear and draw the grid.
 
 Sit upright at your normal viewing distance from your monitor and click the button below to begin!</value>
   </data>

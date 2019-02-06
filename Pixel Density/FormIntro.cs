@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Pixel_Density
@@ -13,6 +14,11 @@ namespace Pixel_Density
         private void btnLoadGridForm_Click(object sender, EventArgs e)
         {
             new FormDensity().Show();
+        }
+
+        private void FormIntro_Load(object sender, EventArgs e)
+        {
+            this.Location = new Point(0, 0);
         }
     }
 }
