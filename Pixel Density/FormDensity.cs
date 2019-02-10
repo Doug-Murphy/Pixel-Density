@@ -8,15 +8,15 @@ namespace Pixel_Density
     {
         private const int DRAWN_SQUARE_SIZE = 50;
 
-        public FormDensity()
+        public FormDensity(int startX = 0, int startY = 0)
         {
             InitializeComponent();
+            this.Location = new Point(startX, startY);
         }
 
         private void FormDensity_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
-            this.Location = new Point(0, 0);
         }
 
         private void Panel_Paint(object sender, PaintEventArgs e)

@@ -11,6 +11,9 @@ namespace Pixel_Density
         [DllImport("gdi32.dll")]
         static extern int GetDeviceCaps(IntPtr hdc, int nIndex);
 
+        [DllImport("gdi32.dll")]
+        static extern IntPtr CreateDC(string lpszDriver, string lpszDevice, string lpszOutput, IntPtr lpInitData);
+
         private int _previousScreenIndex;
         private int _currentScreenIndex;
 
@@ -34,7 +37,9 @@ namespace Pixel_Density
 
         private void btnLoadGridForm_Click(object sender, EventArgs e)
         {
-            new FormDensity().Show();
+            var startX = Screen.FromControl(this).Bounds.Left;
+            var startY = Screen.FromControl(this).Bounds.Top;
+            new FormDensity(startX, startY).Show();
         }
 
         public void SystemEvents_DisplaySettingsChanged(object sender, EventArgs e)
@@ -63,24 +68,21 @@ namespace Pixel_Density
             const int VERTSIZE = 6;
             const double MM_TO_INCH_CONVERSION_FACTOR = 25.4;
 
-            Console.WriteLine($"DeviceName = {Screen.FromHandle(this.Handle).DeviceName}");
-            var hDC = Graphics.FromHwnd(this.Handle).GetHdc();
-            var horizontalSizeInMilliMeters = GetDeviceCaps(hDC, HORZSIZE);
-            var verticalSizeInMilliMeters = GetDeviceCaps(hDC, VERTSIZE);
-
-            var horizontalSizeInInches = horizontalSizeInMilliMeters / MM_TO_INCH_CONVERSION_FACTOR;
-            var verticalSizeInInches = verticalSizeInMilliMeters / MM_TO_INCH_CONVERSION_FACTOR;
+            var hDC = Graphics.FromHdc(CreateDC(null, Screen.FromHandle(this.Handle).DeviceName, null, IntPtr.Zero)).GetHdc();
+            var horizontalSizeInInches = GetDeviceCaps(hDC, HORZSIZE) / MM_TO_INCH_CONVERSION_FACTOR;
+            var verticalSizeInInches = GetDeviceCaps(hDC, VERTSIZE) / MM_TO_INCH_CONVERSION_FACTOR;
             var diagonalSizeInInches = Math.Sqrt(Math.Pow(horizontalSizeInInches, 2) + Math.Pow(verticalSizeInInches, 2));
 
-            var screenHeight = Screen.FromControl(this).Bounds.Height;
-            var screenWidth = Screen.FromControl(this).Bounds.Width;
+            var resX = Screen.FromControl(this).Bounds.Width;
+            var resY = Screen.FromControl(this).Bounds.Height;
+            var pixelDensityPPI = Math.Sqrt(Math.Pow(resX, 2) + Math.Pow(resY, 2)) / diagonalSizeInInches;
 
-            Console.WriteLine($"screenHeight = {screenHeight}. screenWidth = {screenWidth}");
-
-            var pixelDensityPPI = Math.Sqrt(Math.Pow(screenWidth, 2) + Math.Pow(screenHeight, 2)) / diagonalSizeInInches;
-
-            lblPPI.Text = $"Current Monitor's PPI: {pixelDensityPPI}";
-            Console.WriteLine($"Horizontal Inches = {horizontalSizeInInches}. Vertical Inches = {verticalSizeInInches}. Diagonal Inches = {diagonalSizeInInches}. Pixel Density (PPI) = {pixelDensityPPI}");
+            lblMoniHeight.Text = $"Physical Height (in): {verticalSizeInInches:N2}";
+            lblMoniWidth.Text = $"Physical Width (in): {horizontalSizeInInches:N2}";
+            lblMoniDiagonal.Text = $"Physical Diagonal (in): {diagonalSizeInInches:N2}";
+            lblMoniResX.Text = $"Resolution Width (px): {resX:N0}";
+            lblMoniResY.Text = $"Resolution Height (px): {resY:N0}";
+            lblMoniPPI.Text = $"Density (ppi): {pixelDensityPPI:N0}";
         }
     }
 }
