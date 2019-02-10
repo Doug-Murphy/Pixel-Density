@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="label1.Text" xml:space="preserve">
+  <data name="lblIntro.Text" xml:space="preserve">
     <value>This application is meant to determine if your current monitor's pixel density/resolution is appropriate for your regular viewing distance.
 
 Black and white squares will be drawn in an alternating fashion. These squares will be exactly 1x1 pixel.
