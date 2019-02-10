@@ -14,8 +14,8 @@ namespace Pixel_Density
         [DllImport("gdi32.dll")]
         static extern IntPtr CreateDC(string lpszDriver, string lpszDevice, string lpszOutput, IntPtr lpInitData);
 
-        private int _previousScreenIndex;
-        private int _currentScreenIndex;
+        private int? _previousScreenIndex;
+        private int? _currentScreenIndex;
 
         private bool ScreenChanged()
         {
@@ -44,26 +44,23 @@ namespace Pixel_Density
 
         public void SystemEvents_DisplaySettingsChanged(object sender, EventArgs e)
         {
-            CalculatePPI();
+            DisplayMonitorInfo(null, null);
         }
 
         private void FormIntro_Load(object sender, EventArgs e)
         {
             this.Location = new Point(0, 0);
             SystemEvents.DisplaySettingsChanged += new EventHandler(SystemEvents_DisplaySettingsChanged);
-            CalculatePPI();
+            DisplayMonitorInfo(null, null);
         }
 
-        private void FormIntro_Move(object sender, EventArgs e)
+        private void DisplayMonitorInfo(object sender, EventArgs e)
         {
-            if (ScreenChanged())
+            if (!ScreenChanged())
             {
-                CalculatePPI();
+                return;
             }
-        }
 
-        private void CalculatePPI()
-        {
             const int HORZSIZE = 4;
             const int VERTSIZE = 6;
             const double MM_TO_INCH_CONVERSION_FACTOR = 25.4;

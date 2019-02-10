@@ -32,12 +32,12 @@
             this.lblIntro = new System.Windows.Forms.Label();
             this.btnLoadGridForm = new System.Windows.Forms.Button();
             this.grpMoniInfo = new System.Windows.Forms.GroupBox();
-            this.lblMoniWidth = new System.Windows.Forms.Label();
-            this.lblMoniHeight = new System.Windows.Forms.Label();
-            this.lblMoniPPI = new System.Windows.Forms.Label();
-            this.lblMoniResX = new System.Windows.Forms.Label();
-            this.lblMoniResY = new System.Windows.Forms.Label();
             this.lblMoniDiagonal = new System.Windows.Forms.Label();
+            this.lblMoniResY = new System.Windows.Forms.Label();
+            this.lblMoniResX = new System.Windows.Forms.Label();
+            this.lblMoniPPI = new System.Windows.Forms.Label();
+            this.lblMoniHeight = new System.Windows.Forms.Label();
+            this.lblMoniWidth = new System.Windows.Forms.Label();
             this.grpMoniInfo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,45 +78,15 @@
             this.grpMoniInfo.TabStop = false;
             this.grpMoniInfo.Text = "Current Monitor Information";
             // 
-            // lblMoniWidth
+            // lblMoniDiagonal
             // 
-            this.lblMoniWidth.AutoSize = true;
-            this.lblMoniWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMoniWidth.Location = new System.Drawing.Point(6, 22);
-            this.lblMoniWidth.Name = "lblMoniWidth";
-            this.lblMoniWidth.Size = new System.Drawing.Size(161, 20);
-            this.lblMoniWidth.TabIndex = 0;
-            this.lblMoniWidth.Text = "Physical Width (in):";
-            // 
-            // lblMoniHeight
-            // 
-            this.lblMoniHeight.AutoSize = true;
-            this.lblMoniHeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMoniHeight.Location = new System.Drawing.Point(6, 42);
-            this.lblMoniHeight.Name = "lblMoniHeight";
-            this.lblMoniHeight.Size = new System.Drawing.Size(168, 20);
-            this.lblMoniHeight.TabIndex = 1;
-            this.lblMoniHeight.Text = "Physical Height (in):";
-            // 
-            // lblMoniPPI
-            // 
-            this.lblMoniPPI.AutoSize = true;
-            this.lblMoniPPI.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMoniPPI.Location = new System.Drawing.Point(6, 122);
-            this.lblMoniPPI.Name = "lblMoniPPI";
-            this.lblMoniPPI.Size = new System.Drawing.Size(156, 20);
-            this.lblMoniPPI.TabIndex = 2;
-            this.lblMoniPPI.Text = "Density (ppi): {ppi}";
-            // 
-            // lblMoniResX
-            // 
-            this.lblMoniResX.AutoSize = true;
-            this.lblMoniResX.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMoniResX.Location = new System.Drawing.Point(6, 82);
-            this.lblMoniResX.Name = "lblMoniResX";
-            this.lblMoniResX.Size = new System.Drawing.Size(240, 20);
-            this.lblMoniResX.TabIndex = 3;
-            this.lblMoniResX.Text = "Resolution Width (px): {resX}";
+            this.lblMoniDiagonal.AutoSize = true;
+            this.lblMoniDiagonal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMoniDiagonal.Location = new System.Drawing.Point(6, 62);
+            this.lblMoniDiagonal.Name = "lblMoniDiagonal";
+            this.lblMoniDiagonal.Size = new System.Drawing.Size(186, 20);
+            this.lblMoniDiagonal.TabIndex = 4;
+            this.lblMoniDiagonal.Text = "Physical Diagonal (in):";
             // 
             // lblMoniResY
             // 
@@ -128,15 +98,45 @@
             this.lblMoniResY.TabIndex = 3;
             this.lblMoniResY.Text = "Resolution Height (px): {resY}";
             // 
-            // lblMoniDiagonal
+            // lblMoniResX
             // 
-            this.lblMoniDiagonal.AutoSize = true;
-            this.lblMoniDiagonal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMoniDiagonal.Location = new System.Drawing.Point(6, 62);
-            this.lblMoniDiagonal.Name = "lblMoniDiagonal";
-            this.lblMoniDiagonal.Size = new System.Drawing.Size(186, 20);
-            this.lblMoniDiagonal.TabIndex = 4;
-            this.lblMoniDiagonal.Text = "Physical Diagonal (in):";
+            this.lblMoniResX.AutoSize = true;
+            this.lblMoniResX.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMoniResX.Location = new System.Drawing.Point(6, 82);
+            this.lblMoniResX.Name = "lblMoniResX";
+            this.lblMoniResX.Size = new System.Drawing.Size(240, 20);
+            this.lblMoniResX.TabIndex = 3;
+            this.lblMoniResX.Text = "Resolution Width (px): {resX}";
+            // 
+            // lblMoniPPI
+            // 
+            this.lblMoniPPI.AutoSize = true;
+            this.lblMoniPPI.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMoniPPI.Location = new System.Drawing.Point(6, 122);
+            this.lblMoniPPI.Name = "lblMoniPPI";
+            this.lblMoniPPI.Size = new System.Drawing.Size(156, 20);
+            this.lblMoniPPI.TabIndex = 2;
+            this.lblMoniPPI.Text = "Density (ppi): {ppi}";
+            // 
+            // lblMoniHeight
+            // 
+            this.lblMoniHeight.AutoSize = true;
+            this.lblMoniHeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMoniHeight.Location = new System.Drawing.Point(6, 42);
+            this.lblMoniHeight.Name = "lblMoniHeight";
+            this.lblMoniHeight.Size = new System.Drawing.Size(168, 20);
+            this.lblMoniHeight.TabIndex = 1;
+            this.lblMoniHeight.Text = "Physical Height (in):";
+            // 
+            // lblMoniWidth
+            // 
+            this.lblMoniWidth.AutoSize = true;
+            this.lblMoniWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMoniWidth.Location = new System.Drawing.Point(6, 22);
+            this.lblMoniWidth.Name = "lblMoniWidth";
+            this.lblMoniWidth.Size = new System.Drawing.Size(161, 20);
+            this.lblMoniWidth.TabIndex = 0;
+            this.lblMoniWidth.Text = "Physical Width (in):";
             // 
             // FormIntro
             // 
@@ -152,7 +152,7 @@
             this.Name = "FormIntro";
             this.Text = "Pixel Density Intro";
             this.Load += new System.EventHandler(this.FormIntro_Load);
-            this.Move += new System.EventHandler(this.FormIntro_Move);
+            this.Move += new System.EventHandler(this.DisplayMonitorInfo);
             this.grpMoniInfo.ResumeLayout(false);
             this.grpMoniInfo.PerformLayout();
             this.ResumeLayout(false);
