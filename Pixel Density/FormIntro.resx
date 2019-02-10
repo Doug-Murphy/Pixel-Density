@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="label1.Text" xml:space="preserve">
+  <data name="lblIntro.Text" xml:space="preserve">
     <value>This application is meant to determine if your current monitor's pixel density/resolution is appropriate for your regular viewing distance.
 
 Black and white squares will be drawn in an alternating fashion. These squares will be exactly 1x1 pixel.
@@ -126,7 +126,7 @@ If you more or less see a gray screen, then your monitor's resolution has a pixe
 
 If you can discern the difference in the black/white squares, then you are able to see at the pixel level and may want to consider increasing your monitor's resolution. Note that even if you do see the individual pixels, images on screen are typically moving, yet this grid is still. Therefore, it may still be sufficient regardless.
 
-Upon clicking the button, a new form will appear and draw the grid.
+Upon clicking the button, a new fullscreen form will appear and draw the grid on the same screen that this window is on.
 
 Sit upright at your normal viewing distance from your monitor and click the button below to begin!</value>
   </data>

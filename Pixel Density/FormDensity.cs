@@ -8,20 +8,19 @@ namespace Pixel_Density
     {
         private const int DRAWN_SQUARE_SIZE = 50;
 
-        public FormDensity()
+        public FormDensity(int startX = 0, int startY = 0)
         {
             InitializeComponent();
+            this.Location = new Point(startX, startY);
         }
 
         private void FormDensity_Load(object sender, EventArgs e)
         {
-            this.Size = new Size(1000, 1000);
-            this.Location = new Point(0, 0);
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void Panel_Paint(object sender, PaintEventArgs e)
         {
-
             using (var blackPen = new Pen(Color.FromArgb(255, 0, 0, 0)))
             using (var whitePen = new Pen(Color.FromArgb(255, 255, 255, 255)))
             {
@@ -43,9 +42,6 @@ namespace Pixel_Density
 
             Rectangle screenRectangle = RectangleToScreen(this.ClientRectangle);
 
-            var topMargin = screenRectangle.Top - this.Top;
-            var leftMargin = screenRectangle.Left - this.Left;
-
             var leftSide = 0;
             var columnCounter = 0;
             var rowCounter = 0;
@@ -53,7 +49,7 @@ namespace Pixel_Density
 
             while (leftSide <= this.Width && rowCounter <= rowsRequired)
             {
-                e.Graphics.CopyFromScreen(leftMargin, topMargin, DRAWN_SQUARE_SIZE * columnCounter, DRAWN_SQUARE_SIZE * rowCounter, new Size(DRAWN_SQUARE_SIZE, DRAWN_SQUARE_SIZE));
+                e.Graphics.CopyFromScreen(screenRectangle.Left, screenRectangle.Top, DRAWN_SQUARE_SIZE * columnCounter, DRAWN_SQUARE_SIZE * rowCounter, new Size(DRAWN_SQUARE_SIZE, DRAWN_SQUARE_SIZE));
                 leftSide += DRAWN_SQUARE_SIZE;
                 columnCounter++;
                 if (leftSide >= this.Width)
