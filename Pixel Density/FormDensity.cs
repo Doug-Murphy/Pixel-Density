@@ -19,7 +19,7 @@ namespace Pixel_Density
             this.WindowState = FormWindowState.Maximized;
         }
 
-        private void Panel_Paint(object sender, PaintEventArgs e)
+        private void FormDensity_Paint(object sender, PaintEventArgs e)
         {
             using (var blackPen = new Pen(Color.FromArgb(255, 0, 0, 0)))
             using (var whitePen = new Pen(Color.FromArgb(255, 255, 255, 255)))
@@ -42,18 +42,15 @@ namespace Pixel_Density
 
             Rectangle screenRectangle = RectangleToScreen(this.ClientRectangle);
 
-            var leftSide = 0;
-            var columnCounter = 0;
+            var leftSide = DRAWN_SQUARE_SIZE;
             var rowCounter = 0;
             var rowsRequired = this.Height / DRAWN_SQUARE_SIZE;
 
             while (leftSide <= this.Width)
             {
-                e.Graphics.CopyFromScreen(screenRectangle.Left, screenRectangle.Top, DRAWN_SQUARE_SIZE * columnCounter, 0, new Size(DRAWN_SQUARE_SIZE, DRAWN_SQUARE_SIZE));
-                leftSide += DRAWN_SQUARE_SIZE;
-                columnCounter++;
+                e.Graphics.CopyFromScreen(screenRectangle.Left, screenRectangle.Top, leftSide, 0, new Size(leftSide, DRAWN_SQUARE_SIZE));
+                leftSide *= 2;
             }
-
             while (rowCounter <= rowsRequired)
             {
                 rowCounter++;

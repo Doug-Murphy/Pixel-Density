@@ -41,7 +41,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Pixel Density";
             this.Load += new System.EventHandler(this.FormDensity_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel_Paint);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.FormDensity_Paint);
             this.ResumeLayout(false);
 
         }
