@@ -47,17 +47,17 @@ namespace Pixel_Density
             var rowCounter = 0;
             var rowsRequired = this.Height / DRAWN_SQUARE_SIZE;
 
-            while (leftSide <= this.Width && rowCounter <= rowsRequired)
+            while (leftSide <= this.Width)
             {
-                e.Graphics.CopyFromScreen(screenRectangle.Left, screenRectangle.Top, DRAWN_SQUARE_SIZE * columnCounter, DRAWN_SQUARE_SIZE * rowCounter, new Size(DRAWN_SQUARE_SIZE, DRAWN_SQUARE_SIZE));
+                e.Graphics.CopyFromScreen(screenRectangle.Left, screenRectangle.Top, DRAWN_SQUARE_SIZE * columnCounter, 0, new Size(DRAWN_SQUARE_SIZE, DRAWN_SQUARE_SIZE));
                 leftSide += DRAWN_SQUARE_SIZE;
                 columnCounter++;
-                if (leftSide >= this.Width)
-                {
-                    rowCounter++;
-                    columnCounter = 0;
-                    leftSide = 0;
-                }
+            }
+
+            while (rowCounter <= rowsRequired)
+            {
+                rowCounter++;
+                e.Graphics.CopyFromScreen(screenRectangle.Left, screenRectangle.Top, 0, DRAWN_SQUARE_SIZE * rowCounter, new Size(this.Width, DRAWN_SQUARE_SIZE));
             }
         }
     }
